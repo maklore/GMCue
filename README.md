@@ -1,39 +1,39 @@
-<h1 align="center">GMBattalion</h1>
+<h1 align="center">GMCue</h1>
 
-<h4 align="center">A small system to execute orders in the scope of units added to a list.</h4>
+<h4 align="center">A system to add structs/instances(actors) with a callback function to a list(Stage ID).</h4>
 
 ## Basic setup
 - Create a script in GameMaker
-	- Copy everything from [GMBattalion.gml](https://github.com/maklore/GMBattalion/blob/main/GMBattalion.gml)
+	- Copy everything from [GMCue.gml](https://github.com/maklore/GMCue/blob/main/GMCue.gml)
   - Paste to script file
 
-- Add unit `(instance_id or struct)` and order `(callback function)` to a troop, and order list, using an order ID.
+- Add an actor and callback function to a list(Stage ID).
   ```gml
-  GMBattalion().report_add(0, instance_id_or_struct, function(_value) {
+  GMCue.add(_id, _actor, function(_value) {
   	self.hello = _value.hello;
   });
   ```
-- Execute the order for each unit added to list, with optional cargo `(struct)`.
+- Perform all added callback functions on actors within set Stage ID, with or without extra properties.
   ```gml
-  GMBattalion().order_execute(0, { hello : "world" });
+  GMCue.perform(_id, { hello : "world" });
   ```
 - Enjoy!
 
 
 #### Other functions
-- Order list - Returns an array with order IDs.
+- List Stage IDs - Returns an array of each Stage ID.
   ```gml
-  GMBattalion().order_list();
+  GMCue.list_stages();
   ```
-- Order remove - Removes the order from the list.
+- List actors - Returns an array of each actor from an Stage ID.
   ```gml
-  GMBattalion().order_remove(0);
+  GMCue.list_actors(_id);
   ```
-- Unit list - Returns an array of each unit name in an order ID.
+- Remove stage - Removes Stage ID and all included actors, and callback functions.
   ```gml
-  GMBattalion().unit_list(0);
+  GMCue.remove_stage(_id);
   ```
-- Unit remove - Removes the unit from the order ID troop list.
+- Remove actor - Removes the actor and it's callback function from the Stage ID.
   ```gml
-  GMBattalion().unit_remove(0, my_struct_or_instance_id);
+  GMCue.remove_actor(0, _actor);
   ```
